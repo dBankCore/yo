@@ -56,6 +56,6 @@ This file contains some example notifications - one for each notification type a
 ## power_down
 ## send
 ## receive
-## resteem
+## repost
 ## reward
 ## vote

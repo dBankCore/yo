@@ -1,4 +1,4 @@
-srn ::= "steem:" chain ":" path
+srn ::= "dpay:" chain ":" path
 chain ::= chain_id | chain_id ":" hardfork_id
 chain_id ::= alphanum
 hardfork_id ::= digit

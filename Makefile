@@ -3,10 +3,10 @@ DOCS_DIR := $(ROOT_DIR)/docs
 DOCS_BUILD_DIR := $(DOCS_DIR)/_build
 
 PROJECT_NAME := yo
-PROJECT_DOCKER_TAG := steemit/$(PROJECT_NAME)
+PROJECT_DOCKER_TAG := dpays/$(PROJECT_NAME)
 PROJECT_DOCKER_RUN_ARGS := -p8080:8080 --env-file .env
 
-GIT_USER := steemit
+GIT_USER := dpays
 GIT_REMOTE_REPO := $(PROJECT_NAME)
 CURRENT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 CURRENT_ISSUE := $(subst 'issue-','', $(CURRENT_BRANCH))
@@ -130,6 +130,6 @@ install: clean ## install python app
         fi
 
 
-.PHONY: install-python-steem-macos
-install-python-steem-macos: ## install steem-python lib on macos using homebrew's openssl
-	env LDFLAGS="-L$(brew --prefix openssl)/lib" CFLAGS="-I$(brew --prefix openssl)/include" pipenv install steem
+.PHONY: install-python-dpay-macos
+install-python-dpay-macos: ## install dpay-python lib on macos using homebrew's openssl
+	env LDFLAGS="-L$(brew --prefix openssl)/lib" CFLAGS="-I$(brew --prefix openssl)/include" pipenv install dpay

@@ -3,5 +3,5 @@ subject={% block subject -%}{%- endblock %}
 {% block footer %}
 ---
 
-Your friends at steemit.com
+Your friends at dSite.io
 {% endblock %}

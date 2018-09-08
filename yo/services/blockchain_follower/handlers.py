@@ -2,7 +2,7 @@
 import yo.json
 import re
 
-import steem
+import dpay
 import structlog
 
 from ...schema import Priority
@@ -177,7 +177,7 @@ def handle_comment(op):
         # top level post
         return []
     parent_id = '@' + op_data['parent_author'] + '/' + op_data['parent_permlink']
-    parent = steem.post.Post(parent_id)
+    parent = dpay.post.Post(parent_id)
     note_type = Notification.comment_reply if parent.is_comment() else Notification.post_reply
     logger.debug(
         'handle_comment',
@@ -195,35 +195,35 @@ def handle_comment(op):
     ]
 
 
-def handle_resteem(op):
+def handle_repost(op):
     op_data = op['op'][1]
-    resteem_data = yo.json.loads(op_data['json'])
+    repost_data = yo.json.loads(op_data['json'])
     try:
-        if resteem_data[0] != 'reblog':
-            logger.debug('handle_resteem noop')
+        if repost_data[0] != 'reblog':
+            logger.debug('handle_repost noop')
             return []
     except KeyError:
-        logger.debug('handle_resteem noop')
+        logger.debug('handle_repost noop')
         return []
 
-    account = resteem_data[1]['account']
-    author = resteem_data[1]['author']
-    permlink = resteem_data[1]['permlink']
+    account = repost_data[1]['account']
+    author = repost_data[1]['author']
+    permlink = repost_data[1]['permlink']
     if len(op_data['required_posting_auths']) != 1:
-        logger.error('inavlid resteem op, got %d posting auths, expected 1',
+        logger.error('inavlid repost op, got %d posting auths, expected 1',
                        op_data['required_posting_auths'])
         return []
     if op_data['required_posting_auths'][0] != account:
-        logger.error('invalid resteem op, account must be signer')
+        logger.error('invalid repost op, account must be signer')
         return []
     logger.debug(
-        'handle_resteem', account=account, author=author, permlink=permlink)
+        'handle_repost', account=account, author=author, permlink=permlink)
     return [
         {'eid':           eid(op),
          'from_username': account,
          'to_username':   author,
-         'json_data':     yo.json.dumps(resteem_data[1]),
-         'notify_type':   Notification.resteem,
+         'json_data':     yo.json.dumps(repost_data[1]),
+         'notify_type':   Notification.repost,
          'priority':      Priority.low.value
         }
     ]

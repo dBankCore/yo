@@ -7,8 +7,8 @@ from concurrent.futures import CancelledError
 from collections import defaultdict
 from functools import partial
 
-import steem
-from steem.blockchain import Blockchain
+import dpay
+from dpay.blockchain import Blockchain
 
 import structlog
 import uvloop
@@ -23,7 +23,7 @@ from .handlers import handle_account_update
 from .handlers import handle_send
 from .handlers import handle_receive
 from .handlers import handle_follow
-from .handlers import handle_resteem
+from .handlers import handle_repost
 from .handlers import handle_power_down
 from .handlers import handle_mention
 from .handlers import handle_comment
@@ -41,8 +41,8 @@ EXECUTOR = ThreadPoolExecutor()
                 {
                     "author": "ivelina89",
                     "permlink": "friends-forever",
-                    "sbd_payout": "2.865 SBD",
-                    "steem_payout": "0.000 STEEM",
+                    "bbd_payout": "2.865 BBD",
+                    "dpay_payout": "0.000 BEX",
                     "vesting_payout": "1365.457442 VESTS"
                 }
             ],
@@ -60,7 +60,7 @@ op_map.update({
             'vote': [handle_vote],
             'account_update': [handle_account_update],
             'transfer': [handle_send, handle_receive],
-            'custom_json': [handle_follow, handle_resteem],
+            'custom_json': [handle_follow, handle_repost],
             'withdraw_vesting': [handle_power_down],
             'comment': [handle_mention, handle_comment]
 })
@@ -114,11 +114,11 @@ async def ops_iter(blockchain:Blockchain=None, start_block:int=None):
         loop_elapsed = time.perf_counter() - loop_start
 
 
-async def _main_task(database_url=None, loop=None, steemd_url=None, start_block=None):
+async def _main_task(database_url=None, loop=None, dpayd_url=None, start_block=None):
     logger.debug('main task starting')
     loop = loop or asyncio.get_event_loop()
-    steemd = steem.steemd.Steemd(nodes=[steemd_url])
-    blockchain = Blockchain(steemd_instance=steemd)
+    dpayd = dpay.dpayd.DPayd(nodes=[dpayd_url])
+    blockchain = Blockchain(dpayd_instance=dpayd)
     pool = await create_asyncpg_pool(database_url=database_url, loop=loop)
 
     last_block_num_handled = None
@@ -139,10 +139,10 @@ async def _main_task(database_url=None, loop=None, steemd_url=None, start_block=
             last_block_num_handled = block_num
         loop_elapsed = time.perf_counter() - loop_start
 
-def main_task(database_url=None, steemd_url=None, start_block=None):
+def main_task(database_url=None, dpayd_url=None, start_block=None):
     loop = asyncio.get_event_loop()
     loop.run_until_complete(_main_task(
         database_url=database_url,
         loop=loop,
-        steemd_url=steemd_url,
+        dpayd_url=dpayd_url,
         start_block=start_block))

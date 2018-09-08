@@ -4,7 +4,7 @@ from enum import IntEnum
 class NotificationType(IntEnum):
     power_down = 1
     power_up = 2
-    resteem = 3
+    repost = 3
     feed = 4
     reward = 5
     send = 6
@@ -40,11 +40,11 @@ class ActionStatus(IntEnum):
 
 class EventOrigin(IntEnum):
     blockchain = 1
-    steemit = 2
+    dsite = 2
 
 class EventPriority(IntEnum):
     blockchain = 1
-    steemit = 2
+    dsite = 2
 
 NOTIFICATION_TYPES = [i.name for i in NotificationType]
 TRANSPORT_TYPES = [i.name for i in TransportType]
@@ -59,8 +59,8 @@ Example Notification
 {
             "notify_id": 39,
             "notify_type": "power_down",
-            "created": "2017-10-27T01:31:29.382749",
-            "updated": "2017-10-27T15:16:06.178975",
+            "created": "2018-09-07T01:31:29.382749",
+            "updated": "2018-09-07T15:16:06.178975",
             "read": true,
             "shown": false,
             "username": "test_user",
@@ -111,13 +111,13 @@ if not rate-limited
 if rate-limited:
     delete queue item
     record result
-    
+
 
 '''
 
 yo_schema = {
     '$schema': 'http://json-schema.org/draft-06/schema#',
-    'id': 'https://schema.steemit.com/yo/objects.json',
+    'id': 'https://schema.dpays.io/yo/objects.json',
     'title': 'notification transport schema',
     'definitions': {
         'transport': {
@@ -216,15 +216,15 @@ EVENTS = {
             'example': {
                   "json_metadata": "",
                   "account": "theoretical",
-                  "memo_key": "STM6FATHLohxTN8RWWkU9ZZwVywXo6MEDjHHui1jEBYkG2tTdvMYo",
+                  "memo_key": "DWB6FATHLohxTN8RWWkU9ZZwVywXo6MEDjHHui1jEBYkG2tTdvMYo",
                   "posting": {
                     "key_auths": [
                       [
-                        "STM6FATHLohxTN8RWWkU9ZZwVywXo6MEDjHHui1jEBYkG2tTdvMYo",
+                        "DWB6FATHLohxTN8RWWkU9ZZwVywXo6MEDjHHui1jEBYkG2tTdvMYo",
                         1
                       ],
                       [
-                        "STM76EQNV2RTA6yF9TnBvGSV71mW7eW36MM7XQp24JxdoArTfKA76",
+                        "DWB76EQNV2RTA6yF9TnBvGSV71mW7eW36MM7XQp24JxdoArTfKA76",
                         1
                       ]
                     ],
@@ -243,13 +243,13 @@ EVENTS = {
                 'parent_permlink': [{"anything-but":""}]
             },
             'example': {
-                  "title": "Welcome to Steem!",
+                  "title": "Welcome to dSite!",
                   "parent_permlink": "meta",
                   "permlink": "firstpost",
-                  "parent_author": "steemit",
-                  "body": "Steemit is a social media platform where anyone can earn STEEM points by posting. The more people who like a post, the more STEEM the poster earns. Anyone can sell their STEEM for cash or vest it to boost their voting power.",
+                  "parent_author": "dsite",
+                  "body": "dSite is a social media platform where anyone can earn BEX points by posting. The more people who like a post, the more BEX the poster earns. Anyone can sell their BEX for cash or vest it to boost their voting power.",
                   "json_metadata": "",
-                  "author": "steemit"
+                  "author": "dsite"
             }
         }
     },
@@ -273,9 +273,9 @@ EVENTS = {
             'example':{
               "required_auths": [],
               "id": "follow",
-              "json": "{\"follower\":\"steemit\",\"following\":\"steem\",\"what\":[\"posts\"]}",
+              "json": "{\"follower\":\"dsite\",\"following\":\"dpay\",\"what\":[\"posts\"]}",
               "required_posting_auths": [
-                "steemit"
+                "dsite"
               ]
             }
         }
@@ -288,13 +288,13 @@ EVENTS = {
                 'operation_type': ['comment'],
             },
             'example':{
-                  "title": "Welcome to Steem!",
+                  "title": "Welcome to dSite!",
                   "parent_permlink": "meta",
                   "permlink": "firstpost",
-                  "parent_author": "steemit",
-                  "body": "Steemit is a social media platform where anyone can earn STEEM points by posting. The more people who like a post, the more STEEM the poster earns. Anyone can sell their STEEM for cash or vest it to boost their voting power.",
+                  "parent_author": "dsite",
+                  "body": "dSite is a social media platform where anyone can earn BEX points by posting. The more people who like a post, the more BEX the poster earns. Anyone can sell their BEX for cash or vest it to boost their voting power.",
                   "json_metadata": "",
-                  "author": "steemit"
+                  "author": "dsite"
             }
         }
     },
@@ -317,7 +317,7 @@ EVENTS = {
             },
             'example':{
               "vesting_shares": "200000.000000 VESTS",
-              "account": "steemit"
+              "account": "dsite"
             }
         }
     },
@@ -329,9 +329,9 @@ EVENTS = {
                 'operation_type': ['transfer'],
             },
             'example':{
-              "amount": "833.000 STEEM",
+              "amount": "833.000 BEX",
               "from": "admin",
-              "to": "steemit",
+              "to": "dsite",
               "memo": ""
             }
         }
@@ -344,14 +344,14 @@ EVENTS = {
                 'operation_type': ['transfer'],
             },
             'example':{
-              "amount": "833.000 STEEM",
+              "amount": "833.000 BEX",
               "from": "admin",
-              "to": "steemit",
+              "to": "dsite",
               "memo": ""
             }
         }
     },
-    'resteem':        {
+    'repost':        {
         'priority': 'LOW',
         'source_event':   {
             'type':'blockchain',
@@ -371,8 +371,8 @@ EVENTS = {
             'example': {
                 "author": "ivelina89",
                 "permlink": "friends-forever",
-                "sbd_payout": "2.865 SBD",
-                "steem_payout": "0.000 STEEM",
+                "bbd_payout": "2.865 BBD",
+                "dpay_payout": "0.000 BEX",
                 "vesting_payout": "1365.457442 VESTS"
             }
         }
@@ -385,9 +385,9 @@ EVENTS = {
                 'operation_type': ['vote'],
             },
             'example':{
-              "voter": "steemit78",
+              "voter": "dsite78",
               "permlink": "firstpost",
-              "author": "steemit",
+              "author": "dsite",
               "weight": 10000
             }
         }

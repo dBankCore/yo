@@ -1,6 +1,6 @@
-# Yo notification service
+# dPay Notification Service
 
-Yo is a notifications service for the Steem blockchain, it streams events from the blockchain and searches them for events.
+Yo is a notifications service for the dPay blockchain, it streams events from the blockchain and searches them for events.
 
 ## Yo components:
 
@@ -36,13 +36,13 @@ Copy yo.cfg into my-yo.cfg or similar and then do the following:
 ```
 make docker-image
 YO_CONFIG=my-yo.cfg make .env
-docker run -ti steemit/yo:latest
+docker run -ti dpay/yo:latest
 ```
 
 
 ## # Yo JSON-RPC API
 
-Calls related to notifications via [Jussi](https://github.com/steemit/jussi).
+Calls related to notifications via [dPay API Server](https://github.com/dpays/dpay-api-server).
 
 ## About the different notification types
 
@@ -57,7 +57,7 @@ These are the notification types:
 * `power_down`
 * `send`
 * `receive`
-* `resteem`
+* `repost`
 * `reward`
 * `vote`
 
@@ -104,7 +104,7 @@ Get a user's notifications, with filters & limit.
                     "comment_reply",
                     "post_reply",
                     "vote",
-                    "resteem"
+                    "repost"
                 ],
                 "limit": 30, // defaults to 30
             }
@@ -126,19 +126,19 @@ Get a user's notifications, with filters & limit.
                     "updated": "2017-10-27T01:31:29.382749",
                     "read": false,
                     "shown": false,
-                    "username": "theoretical",
+                    "username": "jared",
                     "data": {
                       "json_metadata": "",
-                      "account": "theoretical",
-                      "memo_key": "STM6FATHLohxTN8RWWkU9ZZwVywXo6MEDjHHui1jEBYkG2tTdvMYo",
+                      "account": "jared",
+                      "memo_key": "DWB6FATHLohxTN8RWWkU9ZZwVywXo6MEDjHHui1jEBYkG2tTdvMYo",
                       "posting": {
                         "key_auths": [
                           [
-                            "STM6FATHLohxTN8RWWkU9ZZwVywXo6MEDjHHui1jEBYkG2tTdvMYo",
+                            "DWB6FATHLohxTN8RWWkU9ZZwVywXo6MEDjHHui1jEBYkG2tTdvMYo",
                             1
                           ],
                           [
-                            "STM76EQNV2RTA6yF9TnBvGSV71mW7eW36MM7XQp24JxdoArTfKA76",
+                            "DWB76EQNV2RTA6yF9TnBvGSV71mW7eW36MM7XQp24JxdoArTfKA76",
                             1
                           ]
                         ],
@@ -154,15 +154,15 @@ Get a user's notifications, with filters & limit.
                     "updated": "2017-10-27T01:15:29.383842",
                     "read": false,
                     "shown": false,
-                    "username": "steemit",
+                    "username": "dsite",
                     "data": {
-                          "title": "Welcome to Steem Reply",
+                          "title": "Welcome to dSite Reply",
                           "parent_permlink": "firstpost-reply",
                           "permlink": "firstpost-reply-comment",
-                          "parent_author": "steemit",
+                          "parent_author": "dsite",
                           "body": "I agree!",
                           "json_metadata": "",
-                          "author": "steemit"
+                          "author": "dsite"
                     }
                 },
                 {
@@ -183,13 +183,13 @@ Get a user's notifications, with filters & limit.
                     "updated": "2017-10-27T01:15:29.383842",
                     "read": false,
                     "shown": false,
-                    "username": "steemit",
+                    "username": "dsite",
                     "data": {
                       "required_auths": [],
                       "id": "follow",
-                      "json": "{\"follower\":\"steemit\",\"following\":\"steem\",\"what\":[\"posts\"]}",
+                      "json": "{\"follower\":\"dsite\",\"following\":\"dpay\",\"what\":[\"posts\"]}",
                       "required_posting_auths": [
-                        "steemit"
+                        "dsite"
                       ]
                     }
                 },
@@ -202,13 +202,13 @@ Get a user's notifications, with filters & limit.
                     "shown": false,
                     "username": "test_user",
                     "data": {
-                          "title": "Welcome to Steem!",
+                          "title": "Welcome to dSite!",
                           "parent_permlink": "meta",
                           "permlink": "firstpost",
-                          "parent_author": "steemit",
-                          "body": "Steemit is a social media platform where anyone can earn STEEM points by posting, even @test_user.",
+                          "parent_author": "dsite",
+                          "body": "dSite is a social media platform where anyone can earn BEX points by posting, even @test_user.",
                           "json_metadata": "",
-                          "author": "steemit"
+                          "author": "dsite"
                     }
                 },
                 {
@@ -218,15 +218,15 @@ Get a user's notifications, with filters & limit.
                     "updated": "2017-10-27T01:15:29.383842",
                     "read": false,
                     "shown": false,
-                    "username": "steemit",
+                    "username": "dsite",
                     "data": {
-                          "title": "Welcome to Steem Reply",
+                          "title": "Welcome to dSite Reply",
                           "parent_permlink": "firstpost",
                           "permlink": "firstpost-reply",
-                          "parent_author": "steemit",
+                          "parent_author": "dsite",
                           "body": "Sounds great!",
                           "json_metadata": "",
-                          "author": "steemit"
+                          "author": "dsite"
                     }
                 },
                 {
@@ -236,10 +236,10 @@ Get a user's notifications, with filters & limit.
                     "updated": "2017-10-27T01:15:29.383842",
                     "read": false,
                     "shown": false,
-                    "username": "steemit",
+                    "username": "dsite",
                     "data": {
                       "vesting_shares": "200000.000000 VESTS",
-                      "account": "steemit"
+                      "account": "dsite"
                     }
                 },
                 {
@@ -251,9 +251,9 @@ Get a user's notifications, with filters & limit.
                     "shown": false,
                     "username": "admin",
                     "data": {
-                      "amount": "833.000 STEEM",
+                      "amount": "833.000 BEX",
                       "from": "admin",
-                      "to": "steemit",
+                      "to": "dsite",
                       "memo": ""
                     }
                 },
@@ -264,17 +264,17 @@ Get a user's notifications, with filters & limit.
                     "updated": "2017-10-27T01:15:29.383842",
                     "read": false,
                     "shown": false,
-                    "username": "steemit",
+                    "username": "dsite",
                     "data": {
-                      "amount": "833.000 STEEM",
+                      "amount": "833.000 BEX",
                       "from": "admin",
-                      "to": "steemit",
+                      "to": "dsite",
                       "memo": ""
                     }
                 },
                 {
                     "notify_id": 10,
-                    "notify_type": "resteem",
+                    "notify_type": "repost",
                     "created": "2017-10-27T01:15:29.383842",
                     "updated": "2017-10-27T01:15:29.383842",
                     "read": false,
@@ -290,12 +290,12 @@ Get a user's notifications, with filters & limit.
                     "updated": "2017-10-27T01:15:29.383842",
                     "read": false,
                     "shown": false,
-                    "username": "ivelina89",
+                    "username": "stan",
                     "data": {
-                        "author": "ivelina89",
+                        "author": "stan",
                         "permlink": "friends-forever",
-                        "sbd_payout": "2.865 SBD",
-                        "steem_payout": "0.000 STEEM",
+                        "bbd_payout": "2.865 BBD",
+                        "dpay_payout": "0.000 BEX",
                         "vesting_payout": "1365.457442 VESTS"
                     }
                 },
@@ -306,11 +306,11 @@ Get a user's notifications, with filters & limit.
                     "updated": "2017-10-27T01:15:29.383842",
                     "read": false,
                     "shown": false,
-                    "username": "steemit78",
+                    "username": "dsite78",
                     "data": {
-                      "voter": "steemit78",
+                      "voter": "dsite78",
                       "permlink": "firstpost",
-                      "author": "steemit",
+                      "author": "dsite",
                       "weight": 10000
                     }
                 }
@@ -444,7 +444,7 @@ Get a user's notifications, with filters & limit.
                     "notification_types": [
                         "power_down",
                         "power_up",
-                        "resteem",
+                        "repost",
                         "feed",
                         "reward",
                         "send",
@@ -462,7 +462,7 @@ Get a user's notifications, with filters & limit.
                     "notification_types": [
                         "power_down",
                         "power_up",
-                        "resteem",
+                        "repost",
                         "feed",
                         "reward",
                         "send",
@@ -505,7 +505,7 @@ Get a user's notifications, with filters & limit.
                             "post_reply",
                             "comment_reply",
                             "mention",
-                            "resteem",
+                            "repost",
                             "feed"
                         ]
                     },
@@ -521,7 +521,7 @@ Get a user's notifications, with filters & limit.
                             "send",
                             "comment_reply",
                             "mention",
-                            "resteem",
+                            "repost",
                             "feed"
                         ]
                     }
@@ -550,7 +550,7 @@ Get a user's notifications, with filters & limit.
                         "post_reply",
                         "comment_reply",
                         "mention",
-                        "resteem",
+                        "repost",
                         "feed"
                     ]
                 },
@@ -566,7 +566,7 @@ Get a user's notifications, with filters & limit.
                         "send",
                         "comment_reply",
                         "mention",
-                        "resteem",
+                        "repost",
                         "feed"
                     ]
                 }

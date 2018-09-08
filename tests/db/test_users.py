@@ -20,7 +20,7 @@ TEST_USER_OBJECT = {
       "notification_types": [
         "power_down",
         "power_up",
-        "resteem",
+        "repost",
         "feed",
         "reward",
         "send",

@@ -103,7 +103,7 @@ def fake_notifications():
                     category='test',
                     permlink='test-post',
                     summary='A test post'),
-                'amount': dict(SBD=6.66, SP=13.37)
+                'amount': dict(BBD=6.66, SP=13.37)
             },
         }
     ]

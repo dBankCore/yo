@@ -80,7 +80,7 @@ class SendGridTransport(BaseTransport):
         if self.can_send:
             to_email = toolz.get_in(notification, ['transports', 'sms', 'subdata'])
             logger.debug('SendGrid sending notification', to_email=to_email)
-            from_email = Email('no-reply@steemit.com', 'steemit.com')
+            from_email = Email('no-reply@dsite.io', 'dSite.io')
 
             mail_content = self.render(notification)
 
